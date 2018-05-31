@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.*;
+import java.util.Iterator;
 
 public class SeleniumPerformanceTest {
 
@@ -17,8 +18,8 @@ public class SeleniumPerformanceTest {
             System.out.println("file not found!");
         }
 
-        //Test(new ChromeDriver());
-        //Test(new FirefoxDriver());
+        Test(new ChromeDriver());
+        Test(new FirefoxDriver());
         Test(new EdgeDriver());
 
         outFile.close();
@@ -26,7 +27,7 @@ public class SeleniumPerformanceTest {
 
     private static void Test(WebDriver driver){
         final long startTime = System.currentTimeMillis();
-
+        driver.manage().deleteAllCookies();
         JavascriptExecutor js = (JavascriptExecutor)driver;
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com");
@@ -69,7 +70,7 @@ public class SeleniumPerformanceTest {
 
         WaitAndClickByCssSelector("#center_column > form > p > button", driver);
 
-        WaitAndClickByCssSelector("#cgv", driver);
+        WaitAndClickById("uniform-cgv", driver);
 
         WaitAndClickByCssSelector("#form > p > button", driver);
 
@@ -104,5 +105,11 @@ public class SeleniumPerformanceTest {
 
     private static void WaitForElementByCssSelector(String cssSelector, WebDriver driver){
         new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
+    }
+
+    private static void WriteHeader(String[] headers){
+        for(int i = 0; i < headers.length; i++){
+
+        }
     }
 }
